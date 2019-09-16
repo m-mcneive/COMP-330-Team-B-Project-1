@@ -23,35 +23,21 @@ public class WeightedGraph {
 
 
   public void buildGraph() {
-    //List before sorting
-    /*for (int x = 0; x < length; x ++) {
-      System.out.println(nodesOriginal[x].getName());
-    }
-  */
+
     nodesUpdated = seperateNodes();
-    //List after sorting
-    for (int x = 0; x < length; x ++) {
-      System.out.println(nodesUpdated[x].getName());
-    }
-    System.out.println();
 
     //Takes sorted list and creates the 2D array of the graph
     for (int i = 0; i < length; i ++) {
+
+      //This adds the names of each value to the first index in each row
       graph[i][0] = nodesUpdated[i].getName();
+
       for (int j = 1; j < length + 1; j++) {
+
+        //Adds a 1 for every edge, signifying that we are unsure if there is a valid connection
         graph[i][j] = "1";
       }
     }
-    graph[0][0] = nodesUpdated[0].getName();
-
-    //prints graph
-    for (int i = 0; i < length; i ++) {
-      for (int j = 0; j < length + 1; j ++) {
-        System.out.print(graph[i][j] + "\t");
-      }
-      System.out.println();
-    }
-
   }
 
 
@@ -90,5 +76,16 @@ public class WeightedGraph {
         }
 		}
     return arr;
+  }
+
+
+  public void printGraph() {
+    //prints graph
+    for (int i = 0; i < length; i ++) {
+      for (int j = 0; j < length + 1; j ++) {
+        System.out.print(graph[i][j] + "\t");
+      }
+      System.out.println();
+    }
   }
 }

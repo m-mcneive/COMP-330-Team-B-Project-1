@@ -19,7 +19,7 @@ public class Runner {
     list[6] = g;
     list[7] = h;
     WeightedGraph wg = new WeightedGraph(list);
-    //wg.buildGraph();
+    wg.printGraph();
 
   }
 
