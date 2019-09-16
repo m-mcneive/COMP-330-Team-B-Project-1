@@ -1,9 +1,9 @@
 
 public class Node {
+  
   private String name;
   private String type;
 
-//test
   public Node(String name, String type) {
     this.name = name;
     this.type = type;

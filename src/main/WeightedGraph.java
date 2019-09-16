@@ -8,30 +8,46 @@ public class WeightedGraph {
   //Number of unique nodes
   private int length;
   //This will be the final graph we use to solve the problem
-  private Node[][] graph;
+  private String[][] graph;
   //This is the list of nodes as they are inputted, need to be sorted
   private Node[] nodesOriginal;
-  //This is the list of nodes (in Node.name format) once seperated by type
+  //This is the list of nodes once seperated by type
   private Node[] nodesUpdated;
 
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
     length = 8;
-    graph = new Node[length][length];
+    graph = new String[length][length + 1];
     buildGraph();
   }
 
 
   public void buildGraph() {
     //List before sorting
-    for (int x = 0; x < length; x ++) {
+    /*for (int x = 0; x < length; x ++) {
       System.out.println(nodesOriginal[x].getName());
     }
-    System.out.println();
+  */
     nodesUpdated = seperateNodes();
     //List after sorting
     for (int x = 0; x < length; x ++) {
       System.out.println(nodesUpdated[x].getName());
+    }
+    System.out.println();
+
+    //Takes sorted list and creates the 2D array of the graph
+    for (int i = 0; i < length; i++) {
+      graph[0][i] = nodesUpdated[i].getName();
+      for (int j = 1; j < length + 1; j ++) {
+        graph[i][j] = "1";
+      }
+    }
+    //prints graph
+    for (int i = 0; i < length; i ++) {
+      for (int j = 1; j < length + 1; j ++) {
+        System.out.print(graph[i][j] + "\t");
+      }
+      System.out.println();
     }
   }
 
@@ -43,7 +59,7 @@ public class WeightedGraph {
   * by type. The order of the elements themselves is not relevant, it is only
   * imoprtant that they be seperated by type.
   */
-  public Node[] seperateNodes() {
+  private Node[] seperateNodes() {
     //HashMap to store the types of each Node (first name, item, etc)
     //Used to seperate the items in graph by type
     //The ArrayList will store all of the values at each type
