@@ -36,19 +36,22 @@ public class WeightedGraph {
     System.out.println();
 
     //Takes sorted list and creates the 2D array of the graph
-    for (int i = 0; i < length; i++) {
-      graph[0][i] = nodesUpdated[i].getName();
-      for (int j = 1; j < length + 1; j ++) {
+    for (int i = 0; i < length; i ++) {
+      graph[i][0] = nodesUpdated[i].getName();
+      for (int j = 1; j < length + 1; j++) {
         graph[i][j] = "1";
       }
     }
+    graph[0][0] = nodesUpdated[0].getName();
+
     //prints graph
     for (int i = 0; i < length; i ++) {
-      for (int j = 1; j < length + 1; j ++) {
+      for (int j = 0; j < length + 1; j ++) {
         System.out.print(graph[i][j] + "\t");
       }
       System.out.println();
     }
+
   }
 
 

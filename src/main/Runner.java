@@ -1,7 +1,7 @@
 public class Runner {
   public static void main(String[] args) {
     Node a = new Node("pat", "firstname");
-    Node b = new Node("lipstick", "item");
+    Node b = new Node("lip", "item");
     Node c = new Node("paula", "firstname");
     Node d = new Node("jones", "lastname");
     Node e = new Node("Doctor", "job");
