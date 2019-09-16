@@ -16,16 +16,18 @@ public class WeightedGraph {
 
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
-    length = 5;
+    length = 8;
     graph = new Node[length][length];
     buildGraph();
   }
+
 
   public void buildGraph() {
     //List before sorting
     for (int x = 0; x < length; x ++) {
       System.out.println(nodesOriginal[x].getName());
     }
+    System.out.println();
     nodesUpdated = seperateNodes();
     //List after sorting
     for (int x = 0; x < length; x ++) {
@@ -34,22 +36,31 @@ public class WeightedGraph {
   }
 
 
+  /*
+  * This method is used to build the graph before problem is solved. Uses the
+  * list of unsorted nodes (nodesOriginal) and hashes them into 4 ArrayLists
+  * seperated by type. The lists are then recombined into a new array ordered
+  * by type. The order of the elements themselves is not relevant, it is only
+  * imoprtant that they be seperated by type.
+  */
   public String[] seperateNodes() {
     //HashMap to store the types of each Node (first name, item, etc)
     //Used to seperate the items in graph by type
     //The ArrayList will store all of the values at each type
     HashMap<String, ArrayList<String>> types = new HashMap<String, ArrayList<String>>();
+
     for (Node n : nodesOriginal) {
       //HashMap of 4 empty arraylists, key of each has is the type
       types.put(n.getType(), new ArrayList<String>());
     }
 
-    //Populating each ArrayList in the hashmap seperated by type
+    //Populating each ArrayList in the hashmap
     for (Node n : nodesOriginal) {
       types.get(n.getType()).add(n.getName());
     }
 
     //Adding elements from HashMap ArrayLists to a new Array. Will now be in order
+    //Return value
     String[] arr = new String[length];
     int i = 0;
     //Iterates through Map and adds elements to arr, seperated by type
