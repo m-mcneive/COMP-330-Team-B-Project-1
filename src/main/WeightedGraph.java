@@ -1,4 +1,4 @@
 
 public class WeightedGraph {
-  private Node[][] graph;
+  private Node[][] graph; 
 }
