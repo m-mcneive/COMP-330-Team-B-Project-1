@@ -12,7 +12,7 @@ public class WeightedGraph {
   //This is the list of nodes as they are inputted, need to be sorted
   private Node[] nodesOriginal;
   //This is the list of nodes (in Node.name format) once seperated by type
-  private String[] nodesUpdated;
+  private Node[] nodesUpdated;
 
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
@@ -31,7 +31,7 @@ public class WeightedGraph {
     nodesUpdated = seperateNodes();
     //List after sorting
     for (int x = 0; x < length; x ++) {
-      System.out.println(nodesUpdated[x]);
+      System.out.println(nodesUpdated[x].getName());
     }
   }
 
@@ -43,29 +43,29 @@ public class WeightedGraph {
   * by type. The order of the elements themselves is not relevant, it is only
   * imoprtant that they be seperated by type.
   */
-  public String[] seperateNodes() {
+  public Node[] seperateNodes() {
     //HashMap to store the types of each Node (first name, item, etc)
     //Used to seperate the items in graph by type
     //The ArrayList will store all of the values at each type
-    HashMap<String, ArrayList<String>> types = new HashMap<String, ArrayList<String>>();
+    HashMap<String, ArrayList<Node>> types = new HashMap<String, ArrayList<Node>>();
 
     for (Node n : nodesOriginal) {
       //HashMap of 4 empty arraylists, key of each has is the type
-      types.put(n.getType(), new ArrayList<String>());
+      types.put(n.getType(), new ArrayList<Node>());
     }
 
     //Populating each ArrayList in the hashmap
     for (Node n : nodesOriginal) {
-      types.get(n.getType()).add(n.getName());
+      types.get(n.getType()).add(n);
     }
 
     //Adding elements from HashMap ArrayLists to a new Array. Will now be in order
     //Return value
-    String[] arr = new String[length];
+    Node[] arr = new Node[length];
     int i = 0;
     //Iterates through Map and adds elements to arr, seperated by type
-    for (Map.Entry<String, ArrayList<String>> entry : types.entrySet()) {
-		    for (String s : entry.getValue()) {
+    for (Map.Entry<String, ArrayList<Node>> entry : types.entrySet()) {
+		    for (Node s : entry.getValue()) {
           arr[i] = s;
           i++;
         }
