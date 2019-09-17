@@ -33,16 +33,16 @@ public class WeightedGraph {
       graph[i][0] = nodesUpdated[i].getName();
 
       for (int j = 1; j < length + 1; j++) {
-
         //Adds a 1 for every edge, signifying that we are unsure if there is a valid connection
         graph[i][j] = "1";
       }
     }
+    setDefaultZeroes();
   }
 
 
   /*
-  * This method is used to build the graph before problem is solved. Uses the
+  * This method is used to help build the graph before problem is solved. Uses the
   * list of unsorted nodes (nodesOriginal) and hashes them into 4 ArrayLists
   * seperated by type. The lists are then recombined into a new array ordered
   * by type. The order of the elements themselves is not relevant, it is only
@@ -55,7 +55,7 @@ public class WeightedGraph {
     HashMap<String, ArrayList<Node>> types = new HashMap<String, ArrayList<Node>>();
 
     for (Node n : nodesOriginal) {
-      //HashMap of 4 empty arraylists, key of each has is the type
+      //HashMap of 4 empty arraylists, key of each hash is the type
       types.put(n.getType(), new ArrayList<Node>());
     }
 
@@ -77,6 +77,16 @@ public class WeightedGraph {
 		}
     return arr;
   }
+
+/*
+* Sets the default zeroes for the graph. The default zeroes are for connections between the
+* same type   i.e. all of the first names will have a connecrtion of 0 between themselves
+*/
+public void setDefaultZeroes() {
+  for (int i = 0; i < length; i ++) {
+    graph[i][i + 1] = "0"; //Sets a nodes connection of itself to 0
+  }
+}
 
 
   public void printGraph() {
