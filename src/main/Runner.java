@@ -9,7 +9,12 @@ public class Runner {
     Node g = new Node("smith", "lastname");
     Node h = new Node("file", "item");
 
-    Node[] list = new Node[8];
+    Node i = new Node("teacher", "job");
+    Node j = new Node("pam", "firstname");
+    Node k = new Node("johnson", "lastname");
+    Node l = new Node("compact", "item");
+
+    Node[] list = new Node[12];
     list[0] = a;
     list[1] = b;
     list[2] = c;
@@ -18,6 +23,10 @@ public class Runner {
     list[5] = f;
     list[6] = g;
     list[7] = h;
+    list[8] = i;
+    list[9] = j;
+    list[10] = k;
+    list[11] = l;
     WeightedGraph wg = new WeightedGraph(list);
     wg.printGraph();
 

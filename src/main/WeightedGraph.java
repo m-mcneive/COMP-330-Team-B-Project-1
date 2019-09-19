@@ -86,7 +86,7 @@ public class WeightedGraph {
 private void setDefaultZeros() {
 
   for (int i = 0; i < length; i ++) {
-    for (int j = 0; j < length; j ++) {
+    for (int j = i; j < length; j ++) {
       if (nodesUpdated[i].getType().equals(nodesUpdated[j].getType())) {
         graph[i][j + 1] = "0";
         graph[j][i + 1] = "0";
