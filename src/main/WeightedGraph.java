@@ -16,7 +16,7 @@ public class WeightedGraph {
 
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
-    length = 8;
+    length = nodesOriginal.length;
     graph = new String[length][length + 1];
     buildGraph();
   }
@@ -37,7 +37,7 @@ public class WeightedGraph {
         graph[i][j] = "1";
       }
     }
-    setDefaultZeroes();
+    setDefaultZeros();
   }
 
 
@@ -78,13 +78,20 @@ public class WeightedGraph {
     return arr;
   }
 
+
 /*
-* Sets the default zeroes for the graph. The default zeroes are for connections between the
+* Sets the default zeros for the graph. The default zeros are for connections between the
 * same type   i.e. all of the first names will have a connecrtion of 0 between themselves
 */
-public void setDefaultZeroes() {
+private void setDefaultZeros() {
+
   for (int i = 0; i < length; i ++) {
-    graph[i][i + 1] = "0"; //Sets a nodes connection of itself to 0
+    for (int j = 0; j < length; j ++) {
+      if (nodesUpdated[i].getType().equals(nodesUpdated[j].getType())) {
+        graph[i][j + 1] = "0";
+        graph[j][i + 1] = "0";
+      }
+    }
   }
 }
 
