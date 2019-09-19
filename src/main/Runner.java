@@ -29,7 +29,7 @@ public class Runner {
     list[11] = l;
     WeightedGraph wg = new WeightedGraph(list);
     wg.printGraph();
-
+//test2
   }
 
 

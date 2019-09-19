@@ -96,6 +96,8 @@ private void setDefaultZeros() {
 }
 
 
+
+
   public void printGraph() {
     //prints graph
     for (int i = 0; i < length; i ++) {
