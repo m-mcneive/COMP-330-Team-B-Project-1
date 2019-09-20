@@ -95,9 +95,48 @@ private void setDefaultZeros() {
   }
 }
 
+public void addConnection(Node n1, Node n2, boolean bool) {
+  int idx1 = -1;
+  int idx2 = -1;
+  for (int i = 0; i < length; i ++) {
+    if (nodesUpdated[i].getName().equals(n1.getName())) {
+      idx1 = i;
+    } else if (nodesUpdated[i].getName().equals(n2.getName())) {
+      idx2 = i;
+    }
+  }
+  if (bool) {
+    graph[idx1][idx2 + 1] = "2";
+    graph[idx2][idx1 + 1] = "2";
+  } else {
+    graph[idx1][idx2 + 1] = "0";
+    graph[idx2][idx1 + 1] = "0";
+  }
+  setZeros();
+}
 
-//test
-//test2
+private void setZeros() {
+  //Number of elements per type
+  int numPerType = length / 4; //3
+
+  //Nested for loops iterate through the whole graph looking for any '2s'
+  for (int i = 0; i < length; i++){
+    for (int j = 1; j < length + 1; j ++) {
+      if (graph[i][j].equals("2")) {
+
+        //finds which type group the 2 was found in (e.g. first names would be group 1,
+        //items would be group 2, etc.)
+        int group = (j-1) / numPerType + 1;//4
+
+        //Iterates through that group only, setting everything but the 2 to a zero
+        for (int x = (group - 1) * numPerType + 1; x < (group) * numPerType + 1; x++) {
+          if (!graph[i][x].equals("2"))
+            graph[i][x] = "0";
+        }
+      }
+    }
+  }
+}
 
 
   public void printGraph() {
