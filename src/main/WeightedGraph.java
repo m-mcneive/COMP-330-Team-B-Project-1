@@ -95,9 +95,20 @@ private void setDefaultZeros() {
   }
 }
 
+/*
+* n1 and n2 are the 2 nodes that we are connecting
+* bool designates whether a connection is positive (2) or negative (0)
+*
+* Finds the indicies of the 2 nodes and sets them to either 2 or 0 in graph
+*/
+
 public void addConnection(Node n1, Node n2, boolean bool) {
+  //index of n1
   int idx1 = -1;
+  //index of n2
   int idx2 = -1;
+
+  //Looks through nodesUpdated to find the indecies of n1 and n2
   for (int i = 0; i < length; i ++) {
     if (nodesUpdated[i].getName().equals(n1.getName())) {
       idx1 = i;
@@ -105,6 +116,9 @@ public void addConnection(Node n1, Node n2, boolean bool) {
       idx2 = i;
     }
   }
+
+  //A true value for bool means that there is a positive connection between n1 and n2
+  //a false bool means a negative one
   if (bool) {
     graph[idx1][idx2 + 1] = "2";
     graph[idx2][idx1 + 1] = "2";
@@ -114,6 +128,13 @@ public void addConnection(Node n1, Node n2, boolean bool) {
   }
   setZeros();
 }
+
+
+/*
+* Iterates through all of graph looking for connections of '2'. If found, this means
+* that the rest of connections of the same type to the node will be 0. This method
+* finds which group the '2' connection is in and sets the rest of them to 0.
+*/
 
 private void setZeros() {
   //Number of elements per type
@@ -126,7 +147,7 @@ private void setZeros() {
 
         //finds which type group the 2 was found in (e.g. first names would be group 1,
         //items would be group 2, etc.)
-        int group = (j-1) / numPerType + 1;//4
+        int group = (j-1) / numPerType + 1;
 
         //Iterates through that group only, setting everything but the 2 to a zero
         for (int x = (group - 1) * numPerType + 1; x < (group) * numPerType + 1; x++) {
@@ -138,9 +159,10 @@ private void setZeros() {
   }
 }
 
-
+/*
+* prints the graph
+*/
   public void printGraph() {
-    //prints graph
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < length + 1; j ++) {
         System.out.print(graph[i][j] + "\t");
