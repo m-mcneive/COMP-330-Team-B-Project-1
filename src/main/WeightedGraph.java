@@ -95,6 +95,7 @@ private void setDefaultZeros() {
   }
 }
 
+
 /*
 * n1 and n2 are the 2 nodes that we are connecting
 * bool designates whether a connection is positive (2) or negative (0)
@@ -126,7 +127,7 @@ public void addConnection(Node n1, Node n2, boolean bool) {
     graph[idx1][idx2 + 1] = "0";
     graph[idx2][idx1 + 1] = "0";
   }
-  setZeros();
+  setNonDefaultZeros();
 }
 
 
@@ -136,7 +137,7 @@ public void addConnection(Node n1, Node n2, boolean bool) {
 * finds which group the '2' connection is in and sets the rest of them to 0.
 */
 
-private void setZeros() {
+private void setNonDefaultZeros() {
   //Number of elements per type
   int numPerType = length / 4; //3
 
@@ -147,21 +148,36 @@ private void setZeros() {
 
         //finds which type group the 2 was found in (e.g. first names would be group 1,
         //items would be group 2, etc.)
-        int group = (j-1) / numPerType + 1;
+        //Value for setting zeros in a row
+        int groupRow = (j-1) / numPerType + 1;
 
         //Iterates through that group only, setting everything but the 2 to a zero
-        for (int x = (group - 1) * numPerType + 1; x < (group) * numPerType + 1; x++) {
+        //Sets rthe value in a row only
+        for (int x = (groupRow - 1) * numPerType + 1; x < (groupRow) * numPerType + 1; x++) {
           if (!graph[i][x].equals("2"))
             graph[i][x] = "0";
+          }
+
+        //finds which type group the 2 was found in (e.g. first names would be group 1,
+        //items would be group 2, etc.)
+        //Value for setting zeros in a column
+        int groupCol = i/numPerType + 1;
+
+        for (int y = (groupCol - 1) * numPerType; y < groupCol * numPerType; y++) {
+          if (!graph[y][j].equals("2"))
+            graph[y][j] = "0";
+          }
         }
       }
     }
   }
-}
+
+
 
 /*
 * prints the graph
 */
+
   public void printGraph() {
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < length + 1; j ++) {

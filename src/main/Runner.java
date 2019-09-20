@@ -14,12 +14,17 @@ public class Runner {
     Node k = new Node("johnson", "lastname");
     Node l = new Node("compact", "item");
 
-    Node m = new Node("polit", "job");
+    Node m = new Node("pilot", "job");
     Node n = new Node("peggy", "firstname");
     Node o = new Node("dixon", "lastname");
-    Node p = new Node("phone", "item");
+    Node p = new Node("comb", "item");
 
-    Node[] list = new Node[16];
+    Node q = new Node("judge", "job");
+    Node r = new Node("penny", "firstname");
+    Node s = new Node("doe", "lastname");
+    Node t = new Node("keyring", "item");
+
+    Node[] list = new Node[20];
     list[0] = a;
     list[1] = b;
     list[2] = c;
@@ -36,9 +41,13 @@ public class Runner {
     list[13] = n;
     list[14] = o;
     list[15] = p;
+    list[16] = q;
+    list[17] = r;
+    list[18] = s;
+    list[19] = t;
     WeightedGraph wg = new WeightedGraph(list);
     //wg.printGraph();
-    wg.addConnection(j, k, true);
+    wg.addConnection(c, k, true);
     wg.printGraph();
 //test2
   }
