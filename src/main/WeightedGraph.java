@@ -103,31 +103,39 @@ private void setDefaultZeros() {
 * Finds the indicies of the 2 nodes and sets them to either 2 or 0 in graph
 */
 
-public void addConnection(Node n1, Node n2, boolean bool) {
+public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   //index of n1
-  int idx1 = -1;
+  int connectionIdx1 = -1;
   //index of n2
-  int idx2 = -1;
+  int connectionIdx2 = -1;
 
+  System.out.println(n2.getName());
   //Looks through nodesUpdated to find the indecies of n1 and n2
   for (int i = 0; i < length; i ++) {
     if (nodesUpdated[i].getName().equals(n1.getName())) {
-      idx1 = i;
+      connectionIdx1 = i;
+      System.out.println(connectionIdx1 + " idx1");
     } else if (nodesUpdated[i].getName().equals(n2.getName())) {
-      idx2 = i;
+      connectionIdx2 = i;
+      System.out.println(connectionIdx2 + " idx2");
     }
   }
-
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
   if (bool) {
-    graph[idx1][idx2 + 1] = "2";
-    graph[idx2][idx1 + 1] = "2";
+    graph[connectionIdx1][connectionIdx2 + 1] = "2";
+    graph[connectionIdx2][connectionIdx1 + 1] = "2";
   } else {
-    graph[idx1][idx2 + 1] = "0";
-    graph[idx2][idx1 + 1] = "0";
+    graph[connectionIdx1][connectionIdx2 + 1] = "0";
+    graph[connectionIdx2][connectionIdx1 + 1] = "0";
+  }
+
+  if (connect){
+    connectRows(n1, n2);
   }
   setNonDefaultZeros();
+
+
 }
 
 
@@ -152,7 +160,7 @@ private void setNonDefaultZeros() {
         int groupRow = (j-1) / numPerType + 1;
 
         //Iterates through that group only, setting everything but the 2 to a zero
-        //Sets rthe value in a row only
+        //Sets the value in a row only
         for (int x = (groupRow - 1) * numPerType + 1; x < (groupRow) * numPerType + 1; x++) {
           if (!graph[i][x].equals("2"))
             graph[i][x] = "0";
@@ -163,6 +171,8 @@ private void setNonDefaultZeros() {
         //Value for setting zeros in a column
         int groupCol = i/numPerType + 1;
 
+        //Iterates through that group only, setting everything but the 2 to a zero
+        //Sets the value in a column only
         for (int y = (groupCol - 1) * numPerType; y < groupCol * numPerType; y++) {
           if (!graph[y][j].equals("2"))
             graph[y][j] = "0";
@@ -173,12 +183,60 @@ private void setNonDefaultZeros() {
   }
 
 
+/*
+* Method to connect two nodes fully. Once a positive connection has been made
+* between two nodes, each one should be connect to all of the other connections
+* of each other. For ecample, if Pat lost his comb and we later find out that the
+* person who lost his comb was the teacher, then teacher should also connect to Pat
+* and vice versa
+*/
+
+private void connectRows(Node n1, Node n2) {
+
+  //Indecies of the 2 nodes to be connected
+  int n1Idx = -1;
+  int n2Idx = -1;
+  //Looks through nodesUpdated to find the indecies of n1 and n2
+  for (int i = 0; i < length; i ++) {
+    if (nodesUpdated[i].getName().equals(n1.getName())) {
+      n1Idx = i;
+    } else if (nodesUpdated[i].getName().equals(n2.getName())) {
+      n2Idx = i;
+    }
+  }
+
+//Looks through the first node to find any other positive connections
+  for (int i = 0; i < length; i++) {
+    if (graph[n1Idx][i + 1].equals("2") && n2Idx != i) {
+      //If founnd, connects the newly found node to the other one
+      addConnection(n2, nodesUpdated[i], true, false);
+    }
+  }
+  //Looks through the second node to find any other positive connections
+  for (int i = 0; i < length; i++) {
+    if (graph[n2Idx][i + 1].equals("2") && n1Idx != i) {
+      //If founnd, connects the newly found node to the other one
+      addConnection(n1, nodesUpdated[i], true, false);
+    }
+  }
+}
+
+
+
+
 
 /*
 * prints the graph
 */
 
   public void printGraph() {
+    System.out.print("\t");
+    for (int x = -1; x < length; x ++) {
+      if (x >= 0) {
+        System.out.print(nodesUpdated[x].getName() + "\t");
+      }
+    }
+    System.out.println();
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < length + 1; j ++) {
         System.out.print(graph[i][j] + "\t");
