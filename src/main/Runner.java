@@ -47,7 +47,7 @@ public class Runner {
     list[19] = t;
     WeightedGraph wg = new WeightedGraph(list);
     //wg.printGraph();
-    
+    /*
     wg.addConnection(m, k, true, true);
     wg.addConnection(h, m, true, true);
     wg.addConnection(h, k, true, true);
@@ -81,13 +81,13 @@ public class Runner {
     wg.addConnection(n, b, false, false);
     wg.addConnection(a, b, false, false);
 
-    wg.addConnection(o, q, true, true);
+    wg.addConnection(o, q, true, true);*/
 
-    /*
+
     //tests to show that .connectRows() works as intended
     wg.addConnection(a, p, true, true);  //pat 0  and comb 8
     wg.addConnection(e, p, true, true);  //doctor 10   and comb 8
-    wg.addConnection(o, e, true, true);*/
+    wg.addConnection(o, e, false, false);
     wg.printGraph();
 //test2
   }

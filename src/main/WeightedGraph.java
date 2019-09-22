@@ -131,7 +131,7 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   }
 
   if (connect){
-    connectRows(n1, n2);
+    connectRows(connectionIdx1, connectionIdx2);
   }
   setNonDefaultZeros();
 
@@ -191,32 +191,20 @@ private void setNonDefaultZeros() {
 * and vice versa
 */
 
-private void connectRows(Node n1, Node n2) {
-
-  //Indecies of the 2 nodes to be connected
-  int n1Idx = -1;
-  int n2Idx = -1;
-  //Looks through nodesUpdated to find the indecies of n1 and n2
-  for (int i = 0; i < length; i ++) {
-    if (nodesUpdated[i].getName().equals(n1.getName())) {
-      n1Idx = i;
-    } else if (nodesUpdated[i].getName().equals(n2.getName())) {
-      n2Idx = i;
-    }
-  }
+private void connectRows(int idx1, int idx2) {
 
 //Looks through the first node to find any other positive connections
   for (int i = 0; i < length; i++) {
-    if (graph[n1Idx][i + 1].equals("2") && n2Idx != i) {
+    if (graph[idx1][i + 1].equals("2") && idx2 != i) {
       //If founnd, connects the newly found node to the other one
-      addConnection(n2, nodesUpdated[i], true, false);
+      addConnection(nodesUpdated[idx2], nodesUpdated[i], true, false);
     }
   }
   //Looks through the second node to find any other positive connections
   for (int i = 0; i < length; i++) {
-    if (graph[n2Idx][i + 1].equals("2") && n1Idx != i) {
+    if (graph[idx2][i + 1].equals("2") && idx1 != i) {
       //If founnd, connects the newly found node to the other one
-      addConnection(n1, nodesUpdated[i], true, false);
+      addConnection(nodesUpdated[idx1], nodesUpdated[i], true, false);
     }
   }
 }
