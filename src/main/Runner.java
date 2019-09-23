@@ -47,47 +47,50 @@ public class Runner {
     list[19] = t;
     WeightedGraph wg = new WeightedGraph(list);
     //wg.printGraph();
-    /*
+
     wg.addConnection(m, k, true, true);
     wg.addConnection(h, m, true, true);
     wg.addConnection(h, k, true, true);
 
     wg.addConnection(i, p, true, true);
 
-    wg.addConnection(o, b, true, true);
+    wg.addConnection(o, b, true, true); //dixon lipstick
 
-    wg.addConnection(c, e, false, false);
-    wg.addConnection(c, p, false, false);
-    wg.addConnection(r, e, false, false);
-    wg.addConnection(r, p, false, false);
-    wg.addConnection(n, e, false, false);
-    wg.addConnection(n, p, false, false);
+    wg.addConnection(c, e, false, true);
+    wg.addConnection(c, p, false, true);
+    wg.addConnection(r, e, false, true);
+    wg.addConnection(r, p, false, true);
+    wg.addConnection(n, e, false, true);
+    wg.addConnection(n, p, false, true);
 
-    wg.addConnection(j, h, false, false);
-    wg.addConnection(j, t, false, false);
+    wg.addConnection(j, h, false, true);
+    wg.addConnection(j, t, false, true);
 
-    wg.addConnection(c, g, false, false);
-    wg.addConnection(c, s, false, false);
+    wg.addConnection(c, g, false, true);
+    wg.addConnection(c, s, false, true);
     wg.addConnection(c, l, true, true);
 
-    wg.addConnection(r, f, false, false);
-    wg.addConnection(r, q, false, false);
+    wg.addConnection(r, f, false, true);
+    wg.addConnection(r, q, false, true); //judge  penny NOT
 
-    wg.addConnection(n, i, false, false);
+    wg.addConnection(n, i, false, true);
+    wg.addConnection(n, d, false, true);
+    wg.addConnection(n, g, false, true);
+    wg.addConnection(n, k, false, true);
 
-    wg.addConnection(c, q, false, false);
-    wg.addConnection(s, e, false, false);
+    wg.addConnection(c, q, false, true); //judge  paula NOT
+    wg.addConnection(s, e, false, true);
 
-    wg.addConnection(n, b, false, false);
-    wg.addConnection(a, b, false, false);
-
-    wg.addConnection(o, q, true, true);*/
+    wg.addConnection(n, b, false, true);
+    wg.addConnection(a, b, false, true);
 
 
-    //tests to show that .connectRows() works as intended
+
+  /*  //tests to show that .connectRows() works as intended
     wg.addConnection(a, p, true, true);  //pat 0  and comb 8
     wg.addConnection(e, p, true, true);  //doctor 10   and comb 8
-    wg.addConnection(o, e, false, false);
+    wg.addConnection(o, e, false, false);*/
+    wg.checkForPossibleTwoConnections(0, 0);
     wg.printGraph();
 //test2
   }

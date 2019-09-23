@@ -109,29 +109,39 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   //index of n2
   int connectionIdx2 = -1;
 
-  System.out.println(n2.getName());
+//  System.out.println(n2.getName());
   //Looks through nodesUpdated to find the indecies of n1 and n2
   for (int i = 0; i < length; i ++) {
     if (nodesUpdated[i].getName().equals(n1.getName())) {
       connectionIdx1 = i;
-      System.out.println(connectionIdx1 + " idx1");
+    //  System.out.println(connectionIdx1 + " idx1");
     } else if (nodesUpdated[i].getName().equals(n2.getName())) {
       connectionIdx2 = i;
-      System.out.println(connectionIdx2 + " idx2");
+    //  System.out.println(connectionIdx2 + " idx2");
     }
   }
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
   if (bool) {
+
     graph[connectionIdx1][connectionIdx2 + 1] = "2";
     graph[connectionIdx2][connectionIdx1 + 1] = "2";
   } else {
+
     graph[connectionIdx1][connectionIdx2 + 1] = "0";
     graph[connectionIdx2][connectionIdx1 + 1] = "0";
   }
 
+  //This parameter is used so that the method connectRows() does not create an infinite loop
+  //of calling this method
+
   if (connect){
-    connectRows(connectionIdx1, connectionIdx2);
+    if (bool) {
+      connectPositiveRows(connectionIdx1, connectionIdx2);
+    }
+    if(!bool) {
+      connectNegativeRows(connectionIdx1, connectionIdx2);
+    }
   }
   setNonDefaultZeros();
 
@@ -191,7 +201,7 @@ private void setNonDefaultZeros() {
 * and vice versa
 */
 
-private void connectRows(int idx1, int idx2) {
+private void connectPositiveRows(int idx1, int idx2) {
 
 //Looks through the first node to find any other positive connections
   for (int i = 0; i < length; i++) {
@@ -210,7 +220,25 @@ private void connectRows(int idx1, int idx2) {
 }
 
 
+public void connectNegativeRows(int idx1, int idx2) {
+  for (int i = 0; i < length; i++) {
+    if (graph[idx1][i + 1].equals("2")) {
+      addConnection(nodesUpdated[idx2], nodesUpdated[i], false, false);
+    }
+  }
+  for (int j = 0; j < length; j++) {
+    if (graph[idx2][j + 1].equals("2")) {
+      addConnection(nodesUpdated[idx1], nodesUpdated[j], false, false);
+    }
+  }
+}
 
+
+
+
+public void checkForPossibleTwoConnections(int rowIdx, int startIdx) {
+  
+}
 
 
 /*
