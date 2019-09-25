@@ -138,6 +138,7 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   if (connect){
     if (bool) {
       connectPositiveRows(connectionIdx1, connectionIdx2);
+      connectLikeOnes(connectionIdx1, connectionIdx2);
     }
     if(!bool) {
       connectNegativeRows(connectionIdx1, connectionIdx2);
@@ -220,7 +221,7 @@ private void connectPositiveRows(int idx1, int idx2) {
 }
 
 
-public void connectNegativeRows(int idx1, int idx2) {
+private void connectNegativeRows(int idx1, int idx2) {
   for (int i = 0; i < length; i++) {
     if (graph[idx1][i + 1].equals("2")) {
       addConnection(nodesUpdated[idx2], nodesUpdated[i], false, false);
@@ -233,12 +234,28 @@ public void connectNegativeRows(int idx1, int idx2) {
   }
 }
 
-
-
-
-public void checkForPossibleTwoConnections(int rowIdx, int startIdx) {
-  
+/*
+* Once 2 nodes recieve a positive connection, not only should the 0s be changed.
+* This method makes it so that each node will now only share "1" connections. If
+* 2 nodes connect, the values that do not share a connection of 1 should both be
+* set to 0. Method is only called after a positive connection is made.
+*/
+private void connectLikeOnes(int idx1, int idx2) {
+  //Iterates through every column in a row
+  for (int i = 0; i < length; i ++) {
+    //If both values to not both equal 1 then they will need to be set to 0
+      if (!(graph[idx1][i + 1].equals("1") && graph[idx2][i + 1].equals("1"))) {
+        //However, if the values are the 2 connection then they should not change
+        if (!(graph[idx1][i + 1].equals("2") || graph[idx2][i + 1].equals("2"))) {
+          graph[idx1][i + 1] = "0";
+          graph[idx2][i + 1] = "0";
+          graph[i][idx1 + 1] = "0";
+          graph[i][idx2 + 1] = "0";
+        }
+      }
+    }
 }
+
 
 
 /*

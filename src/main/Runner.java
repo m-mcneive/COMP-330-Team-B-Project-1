@@ -90,7 +90,8 @@ public class Runner {
     wg.addConnection(a, p, true, true);  //pat 0  and comb 8
     wg.addConnection(e, p, true, true);  //doctor 10   and comb 8
     wg.addConnection(o, e, false, false);*/
-    wg.checkForPossibleTwoConnections(0, 0);
+  //  wg.checkForPossibleTwoConnections(0, 0);
+    //wg.connectLikeOnes(1, 7);
     wg.printGraph();
 //test2
   }
