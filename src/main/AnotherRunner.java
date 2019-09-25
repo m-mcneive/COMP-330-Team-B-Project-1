@@ -116,52 +116,55 @@ public class AnotherRunner {
         //______This is where the main "Clue Input" loop will begin and take place.
         // Not writing now so that program can run.
         // Will update with updated code from WeightedGraph so that it loops until all connections are made.
-        System.out.print("Please input the name of the first item in the relationship.");
-        name1 = scan.next();
-        System.out.print("Please input the name of the second item in the relationship.");
-        name2 = scan.next();
-        System.out.println("Are "+ name1 +" and " +  name2 + " related? (Please input \"yes\", \"y\", \"true\", or \"t\" for " +
-                "true. Please input \"no\", \"n\", \"false\", or \"f\" for false.)");
         do {
-            userInput = scan.next();
-            if (userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("no")
-                    || userInput.equalsIgnoreCase("false") || userInput.equalsIgnoreCase("f")) {
-                relationship = false;
-                correctInput = true;
-            } else if (userInput.equalsIgnoreCase("y") || userInput.equalsIgnoreCase("yes")
-                    || userInput.equalsIgnoreCase("true") || userInput.equalsIgnoreCase("t")) {
-                relationship = true;
-                correctInput = true;
-            } else {
-                correctInput = false;
-                System.out.println("Sorry, " + userInput +" is not a valid input.");
-                System.out.println("Are "+ name1 +" and " +  name2 + " related? (Please input \"yes\", \"y\", \"true\", or \"t\" for " +
-                        "true. Please input \"no\", \"n\", \"false\", or \"f\" for false.)");
-            }
-        }while(!correctInput);
-        // Now that I have those inputs, we need to find the two nodes alluded to be the user.
+            System.out.print("Please input the name of the first item in the relationship.");
+            name1 = scan.next();
+            System.out.print("Please input the name of the second item in the relationship.");
+            name2 = scan.next();
+            System.out.println("Are " + name1 + " and " + name2 + " related? (Please input \"yes\", \"y\", \"true\", or \"t\" for " +
+                    "true. Please input \"no\", \"n\", \"false\", or \"f\" for false.)");
+            do {
+                userInput = scan.next();
+                if (userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("no")
+                        || userInput.equalsIgnoreCase("false") || userInput.equalsIgnoreCase("f")) {
+                    relationship = false;
+                    correctInput = true;
+                } else if (userInput.equalsIgnoreCase("y") || userInput.equalsIgnoreCase("yes")
+                        || userInput.equalsIgnoreCase("true") || userInput.equalsIgnoreCase("t")) {
+                    relationship = true;
+                    correctInput = true;
+                } else {
+                    correctInput = false;
+                    System.out.println("Sorry, " + userInput + " is not a valid input.");
+                    System.out.println("Are " + name1 + " and " + name2 + " related? (Please input \"yes\", \"y\", \"true\", or \"t\" for " +
+                            "true. Please input \"no\", \"n\", \"false\", or \"f\" for false.)");
+                }
+            } while (!correctInput);
+            // Now that I have those inputs, we need to find the two nodes alluded to be the user.
 
-        // Possibility for below code to fail if the item name user input was misspelled or purposefully incorrect,
-        // therefore not found within the array list.
-        for(int k = 0; k < arrayListOfItems.size(); k++){
-            if(arrayListOfItems.get(k).getName() == name1 ){
-                a = arrayListOfItems.get(k);
-            }else if(arrayListOfItems.get(k).getName() == name2 ){
-                b = arrayListOfItems.get(k);
-            }
-        }// this should select the correct Nodes
+            // Possibility for below code to fail if the item name user input was misspelled or purposefully incorrect,
+            // therefore not found within the array list.
+            for (int k = 0; k < arrayListOfItems.size(); k++) {
+                if (arrayListOfItems.get(k).getName() == name1) {
+                    a = arrayListOfItems.get(k);
+                } else if (arrayListOfItems.get(k).getName() == name2) {
+                    b = arrayListOfItems.get(k);
+                }
+            }// this should select the correct Nodes
 
-        // Time to take those two nodes and set their relationship.x
-        // This is using the code Matt is working on in the matt2 branch.
-        // Commented out for now until we merge all branches to master
+            // Time to take those two nodes and set their relationship.x
+            // This is using the code Matt is working on in the matt2 branch.
+            // Commented out for now until we merge all branches to master
 
-        // wg.addConnection(a, b, relationship, true);
-        System.out.println("Connection has been made. Please view the changes below");
-        wg.printGraph();
-        System.out.println("Time to add the next connection.");
-        //______End of Loop
-
+            wg.addConnection(a, b, relationship, true);
+            System.out.println("Connection has been made. Please view the changes below");
+            wg.printGraph();
+            System.out.println("Time to add the next connection.");
+            //______End of Loop
+        }while(!wg.checkForCompletion());
         //after this, we can create a nice print out of all of the connections to end the program.
+
+        wg.printCompleteGraph();
 
     }
 
