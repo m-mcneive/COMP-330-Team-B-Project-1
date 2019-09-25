@@ -258,7 +258,7 @@ private void connectLikeOnes(int idx1, int idx2) {
 }
 
 
-private void checkForConnections() {
+public void checkForConnections() {
   int row = 0;
   int col = 0;
   int num1s;
@@ -273,16 +273,38 @@ private void checkForConnections() {
       }
     }
     if (num1s == 1) {
-      System.out.println("Here" + row + " " + idx);
       addConnection(nodesUpdated[row], nodesUpdated[idx], true, true);
     }
-    row++;
     if (col == length - 5) {
       col = 0;
+      row++;
     } else {
       col += 5;
     }
   }
+}
+
+public boolean checkForCompletion() {
+  int num = 0;
+  for (int i = 0; i < length; i++) {
+    int currentNum = 0;
+    for (int j = 0; j < length; j++) {
+      if (graph[i][j + 1].equals("1")) {
+        return false;
+      } else if (graph[i][j + 1].equals("2")) {
+        num++;
+        currentNum++;
+      }
+    }
+    if (currentNum != 3) {
+      return false;
+    }
+  }
+  System.out.println(num);
+  if (num != 60 ) {
+    return false;
+  }
+  return true;
 }
 
 

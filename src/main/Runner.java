@@ -92,6 +92,8 @@ public class Runner {
     wg.addConnection(o, e, false, false);*/
   //  wg.checkForPossibleTwoConnections(0, 0);
     //wg.connectLikeOnes(1, 7);
+    //wg.checkForConnections();
+    System.out.println(wg.checkForCompletion());
     wg.printGraph();
 //test2
   }
