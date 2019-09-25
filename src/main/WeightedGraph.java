@@ -258,23 +258,44 @@ private void connectLikeOnes(int idx1, int idx2) {
 }
 
 
+/*
+* Method to look through the whole graph for possible connections that can be made.
+* Essentially, it uses the process of elimination to make connections. If a node
+* has only a single 1 connection for a value in a specific group and zeros for the
+* rest, then the one remaining 1 connection should be a 2.
+*/
+
 public void checkForConnections() {
+  //Current row
   int row = 0;
+  //Current column
   int col = 0;
+  //Tracks the number of 1s that appear in a group
   int num1s;
+  //If a 1 is found, this will track it's index
   int idx;
+
+  //Loop ends when row becomes the length to the graph, will not cause an out of
+  //bounds error
   while (row < length) {
     num1s = 0;
     idx = 0;
+
+    //Searches only 5 elements (one group) at a time
     for (int i = col; i < col + 5; i++) {
       if (graph[row][i + 1].equals("1")) {
+        //Increments num1s if a 1 is found
         num1s++;
         idx = i;
       }
     }
+
+    //If only one 1 was found, connect row with the value at idx
     if (num1s == 1) {
       addConnection(nodesUpdated[row], nodesUpdated[idx], true, true);
     }
+
+    //Resets indicies
     if (col == length - 5) {
       col = 0;
       row++;
@@ -284,23 +305,36 @@ public void checkForConnections() {
   }
 }
 
+
+/*
+* Method to check if the graph is complete. Graph is complete when each row has
+* exactly 3 2 connections. Furthermore, there will be exactly 60 2 connections
+*/
+
 public boolean checkForCompletion() {
+  //Tracks total number of 2s in the graph
   int num = 0;
   for (int i = 0; i < length; i++) {
+    //tracks number of 2s in the specific row
     int currentNum = 0;
     for (int j = 0; j < length; j++) {
+      //Returns false if a one is found at any point
       if (graph[i][j + 1].equals("1")) {
         return false;
+        //If the value is a 2, increment both num and current num. If the value
+        //is a 0 we do nothing
       } else if (graph[i][j + 1].equals("2")) {
         num++;
         currentNum++;
       }
     }
+    //At the end of each row, if currentNum is not 3 then we return false
     if (currentNum != 3) {
       return false;
     }
   }
   System.out.println(num);
+  //If the total number of 2s found is not 60 then we return false
   if (num != 60 ) {
     return false;
   }
