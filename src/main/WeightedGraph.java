@@ -96,6 +96,9 @@ private void setDefaultZeros() {
 }
 
 
+
+
+
 /*
 * n1 and n2 are the 2 nodes that we are connecting
 * bool designates whether a connection is positive (2) or negative (0)
@@ -105,31 +108,28 @@ private void setDefaultZeros() {
 
 public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   //index of n1
-  int connectionIdx1 = -1;
+  int idx1 = -1;
   //index of n2
-  int connectionIdx2 = -1;
+  int idx2 = -1;
 
-//  System.out.println(n2.getName());
   //Looks through nodesUpdated to find the indecies of n1 and n2
   for (int i = 0; i < length; i ++) {
     if (nodesUpdated[i].getName().equals(n1.getName())) {
-      connectionIdx1 = i;
-    //  System.out.println(connectionIdx1 + " idx1");
+      idx1 = i;
     } else if (nodesUpdated[i].getName().equals(n2.getName())) {
-      connectionIdx2 = i;
-    //  System.out.println(connectionIdx2 + " idx2");
+      idx2 = i;
     }
   }
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
   if (bool) {
 
-    graph[connectionIdx1][connectionIdx2 + 1] = "2";
-    graph[connectionIdx2][connectionIdx1 + 1] = "2";
+    graph[idx1][idx2 + 1] = "2";
+    graph[idx2][idx1 + 1] = "2";
   } else {
 
-    graph[connectionIdx1][connectionIdx2 + 1] = "0";
-    graph[connectionIdx2][connectionIdx1 + 1] = "0";
+    graph[idx1][idx2 + 1] = "0";
+    graph[idx2][idx1 + 1] = "0";
   }
 
   //This parameter is used so that the method connectRows() does not create an infinite loop
@@ -137,18 +137,18 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
 
   if (connect){
     if (bool) {
-      connectPositiveRows(connectionIdx1, connectionIdx2);
-      connectLikeOnes(connectionIdx1, connectionIdx2);
+      connectPositiveRows(idx1, idx2);
+      connectLikeOnes(idx1, idx2);
     }
     if(!bool) {
-      connectNegativeRows(connectionIdx1, connectionIdx2);
+      connectNegativeRows(idx1, idx2);
     }
   }
   setNonDefaultZeros();
   checkForConnections();
-
-
 }
+
+
 
 
 /*
@@ -221,7 +221,11 @@ private void connectPositiveRows(int idx1, int idx2) {
   }
 }
 
-
+/*
+* Similar to connectPositiveRows but used for when a connection of 0 is given for
+* 2 values. If NodeA and NodeB are given a 0 connection, any 2 connection in NodeA
+* should create a negative connection for NodeB and vice versa.
+*/
 private void connectNegativeRows(int idx1, int idx2) {
   for (int i = 0; i < length; i++) {
     if (graph[idx1][i + 1].equals("2")) {
@@ -234,6 +238,11 @@ private void connectNegativeRows(int idx1, int idx2) {
     }
   }
 }
+
+
+
+
+
 
 /*
 * Once 2 nodes recieve a positive connection, not only should the 0s be changed.
@@ -256,6 +265,10 @@ private void connectLikeOnes(int idx1, int idx2) {
       }
     }
 }
+
+
+
+
 
 
 /*
@@ -306,6 +319,10 @@ public void checkForConnections() {
 }
 
 
+
+
+
+
 /*
 * Method to check if the graph is complete. Graph is complete when each row has
 * exactly 3 2 connections. Furthermore, there will be exactly 60 2 connections
@@ -333,12 +350,24 @@ public boolean checkForCompletion() {
       return false;
     }
   }
-  System.out.println(num);
   //If the total number of 2s found is not 60 then we return false
   if (num != 60 ) {
     return false;
   }
   return true;
+}
+
+
+public void printCompleteGraph() {
+  for (int i = 0; i < 5; i++) {
+    System.out.print(nodesUpdated[i].getName() + " -> ");
+    for (int j = 0; j < length; j++) {
+      if (graph[i][j + 1].equals("2")) {
+        System.out.print(nodesUpdated[j].getName() + "   ");
+      }
+    }
+    System.out.println();
+  }
 }
 
 
