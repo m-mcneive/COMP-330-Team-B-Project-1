@@ -145,6 +145,7 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
     }
   }
   setNonDefaultZeros();
+  checkForConnections();
 
 
 }
@@ -254,6 +255,34 @@ private void connectLikeOnes(int idx1, int idx2) {
         }
       }
     }
+}
+
+
+private void checkForConnections() {
+  int row = 0;
+  int col = 0;
+  int num1s;
+  int idx;
+  while (row < length) {
+    num1s = 0;
+    idx = 0;
+    for (int i = col; i < col + 5; i++) {
+      if (graph[row][i + 1].equals("1")) {
+        num1s++;
+        idx = i;
+      }
+    }
+    if (num1s == 1) {
+      System.out.println("Here" + row + " " + idx);
+      addConnection(nodesUpdated[row], nodesUpdated[idx], true, true);
+    }
+    row++;
+    if (col == length - 5) {
+      col = 0;
+    } else {
+      col += 5;
+    }
+  }
 }
 
 
