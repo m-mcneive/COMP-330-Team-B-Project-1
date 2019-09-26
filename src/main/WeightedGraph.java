@@ -14,6 +14,9 @@ public class WeightedGraph {
   //This is the list of nodes once seperated by type
   private Node[] nodesUpdated;
 
+  private int catNum;
+  private int itemNum;
+
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
     length = nodesOriginal.length;
@@ -21,6 +24,11 @@ public class WeightedGraph {
     buildGraph();
   }
 
+  // DG - added this for the user to be able to enter any number of categories and items within them
+  public void setCatNum(int num){this.catNum = num;}
+  public void setItemNum(int num){this.itemNum = num;}
+  public int getItemNum(){return this.itemNum;}
+  public int getCatNum(){return this.catNum;}
 
   public void buildGraph() {
 
@@ -295,7 +303,8 @@ public void checkForConnections() {
     idx = 0;
 
     //Searches only 5 elements (one group) at a time
-    for (int i = col; i < col + 5; i++) {
+    // DG- here instead of 5 i replaces it with itemNum
+    for (int i = col; i < col + itemNum; i++) {
       if (graph[row][i + 1].equals("1")) {
         //Increments num1s if a 1 is found
         num1s++;
@@ -309,11 +318,11 @@ public void checkForConnections() {
     }
 
     //Resets indicies
-    if (col == length - 5) {
+    if (col == length - itemNum) {
       col = 0;
       row++;
     } else {
-      col += 5;
+      col += itemNum;
     }
   }
 }
@@ -359,7 +368,7 @@ public boolean checkForCompletion() {
 
 
 public void printCompleteGraph() {
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
     for (int j = 0; j < length; j++) {
       if (graph[i][j + 1].equals("2")) {
