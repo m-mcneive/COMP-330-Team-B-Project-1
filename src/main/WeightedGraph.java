@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class WeightedGraph {
 
@@ -24,7 +21,7 @@ public class WeightedGraph {
     buildGraph();
   }
 
-  // DG - added this for the user to be able to enter any number of categories and items within them
+  // DG - added this for teh user to be able to enter any number of categories and items within them
   public void setCatNum(int num){this.catNum = num;}
   public void setItemNum(int num){this.itemNum = num;}
   public int getItemNum(){return this.itemNum;}
@@ -39,7 +36,6 @@ public class WeightedGraph {
 
       //This adds the names of each value to the first index in each row
       graph[i][0] = nodesUpdated[i].getName();
-
       for (int j = 1; j < length + 1; j++) {
         //Adds a 1 for every edge, signifying that we are unsure if there is a valid connection
         graph[i][j] = "1";
@@ -167,7 +163,7 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
 
 private void setNonDefaultZeros() {
   //Number of elements per type
-  int numPerType = length / 4; //3
+  int numPerType = itemNum; // DG- edited this to reflect the number of items
 
   //Nested for loops iterate through the whole graph looking for any '2s'
   for (int i = 0; i < length; i++){
@@ -295,6 +291,7 @@ public void checkForConnections() {
   int num1s;
   //If a 1 is found, this will track it's index
   int idx;
+  // DG - Adding variables to get the number of categories and items
 
   //Loop ends when row becomes the length to the graph, will not cause an out of
   //bounds error
@@ -340,9 +337,10 @@ public void checkForConnections() {
 public boolean checkForCompletion() {
   //Tracks total number of 2s in the graph
   int num = 0;
+  int currentNum = 0;
   for (int i = 0; i < length; i++) {
     //tracks number of 2s in the specific row
-    int currentNum = 0;
+    currentNum = 0;
     for (int j = 0; j < length; j++) {
       //Returns false if a one is found at any point
       if (graph[i][j + 1].equals("1")) {
@@ -355,12 +353,12 @@ public boolean checkForCompletion() {
       }
     }
     //At the end of each row, if currentNum is not 3 then we return false
-    if (currentNum != 3) {
+    if (currentNum != (catNum - 1)) {
       return false;
     }
   }
   //If the total number of 2s found is not 60 then we return false
-  if (num != 60 ) {
+  if (num != (currentNum*catNum*itemNum)) {
     return false;
   }
   return true;
@@ -387,7 +385,7 @@ public void printCompleteGraph() {
 
   public void printGraph() {
     System.out.print("\t");
-    for (int x = -1; x < length; x ++) {
+    for (int x = -1; x < length; x++) {
       if (x >= 0) {
         System.out.print(nodesUpdated[x].getName() + "\t");
       }
