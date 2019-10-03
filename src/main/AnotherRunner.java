@@ -25,8 +25,10 @@ public class AnotherRunner {
         String catName;
         String itemName;
         String name1, name2, userInput;
-        Node a,b;
-        Boolean relationship, correctInput;
+        Node a = new Node("", "");
+        Node b = new Node("", "");
+        Boolean relationship = false;
+        Boolean correctInput = false;
         int num1;
         int num2;
 

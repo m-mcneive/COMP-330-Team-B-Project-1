@@ -14,10 +14,13 @@ public class WeightedGraph {
   //This is the list of nodes once seperated by type
   private Node[] nodesUpdated;
 
+  private int numberOfElePerType;
+
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
     length = nodesOriginal.length;
     graph = new String[length][length + 1];
+    numberOfElePerType = length / 4;
     buildGraph();
   }
 
@@ -204,7 +207,6 @@ private void setNonDefaultZeros() {
 */
 
 private void connectPositiveRows(int idx1, int idx2) {
-
 //Looks through the first node to find any other positive connections
   for (int i = 0; i < length; i++) {
     if (graph[idx1][i + 1].equals("2") && idx2 != i) {
@@ -295,7 +297,7 @@ public void checkForConnections() {
     idx = 0;
 
     //Searches only 5 elements (one group) at a time
-    for (int i = col; i < col + 5; i++) {
+    for (int i = col; i < col + numberOfElePerType; i++) {
       if (graph[row][i + 1].equals("1")) {
         //Increments num1s if a 1 is found
         num1s++;
@@ -309,11 +311,11 @@ public void checkForConnections() {
     }
 
     //Resets indicies
-    if (col == length - 5) {
+    if (col == length - numberOfElePerType) {
       col = 0;
       row++;
     } else {
-      col += 5;
+      col += numberOfElePerType;
     }
   }
 }
@@ -359,7 +361,7 @@ public boolean checkForCompletion() {
 
 
 public void printCompleteGraph() {
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < numberOfElePerType; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
     for (int j = 0; j < length; j++) {
       if (graph[i][j + 1].equals("2")) {
