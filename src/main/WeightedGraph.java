@@ -365,6 +365,8 @@ public boolean checkForCompletion() {
 }
 
 
+//Test
+
 public void printCompleteGraph() {
   for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
