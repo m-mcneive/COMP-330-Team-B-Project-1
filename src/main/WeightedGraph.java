@@ -11,18 +11,13 @@ public class WeightedGraph {
   //This is the list of nodes once seperated by type
   private Node[] nodesUpdated;
 
-<<<<<<< HEAD
-  private int numberOfElePerType;
-=======
   private int catNum;
   private int itemNum;
->>>>>>> cd4c2b0a7aac6e6154896b7a657ef17b6a9765a4
 
   public WeightedGraph(Node[] nodesOriginal) {
     this.nodesOriginal = nodesOriginal;
     length = nodesOriginal.length;
     graph = new String[length][length + 1];
-    numberOfElePerType = length / 4;
     buildGraph();
   }
 
@@ -304,12 +299,8 @@ public void checkForConnections() {
     idx = 0;
 
     //Searches only 5 elements (one group) at a time
-<<<<<<< HEAD
-    for (int i = col; i < col + numberOfElePerType; i++) {
-=======
     // DG- here instead of 5 i replaces it with itemNum
     for (int i = col; i < col + itemNum; i++) {
->>>>>>> cd4c2b0a7aac6e6154896b7a657ef17b6a9765a4
       if (graph[row][i + 1].equals("1")) {
         //Increments num1s if a 1 is found
         num1s++;
@@ -323,19 +314,11 @@ public void checkForConnections() {
     }
 
     //Resets indicies
-<<<<<<< HEAD
-    if (col == length - numberOfElePerType) {
-      col = 0;
-      row++;
-    } else {
-      col += numberOfElePerType;
-=======
     if (col == length - itemNum) {
       col = 0;
       row++;
     } else {
       col += itemNum;
->>>>>>> cd4c2b0a7aac6e6154896b7a657ef17b6a9765a4
     }
   }
 }
@@ -384,11 +367,7 @@ public boolean checkForCompletion() {
 //Test2
 
 public void printCompleteGraph() {
-<<<<<<< HEAD
-  for (int i = 0; i < numberOfElePerType; i++) {
-=======
   for (int i = 0; i < itemNum; i++) {
->>>>>>> cd4c2b0a7aac6e6154896b7a657ef17b6a9765a4
     System.out.print(nodesUpdated[i].getName() + " -> ");
     for (int j = 0; j < length; j++) {
       if (graph[i][j + 1].equals("2")) {
@@ -407,15 +386,21 @@ public void printCompleteGraph() {
 
   public void printGraph() {
     System.out.print("\t");
-    for (int x = -1; x < length; x++) {
-      if (x >= 0) {
+    for (int x = 0; x < length; x++) {
+      if (nodesUpdated[x].getName().length() > 6) {
+        System.out.print(nodesUpdated[x].getName().substring(0,6) + "\t");
+      } else {
         System.out.print(nodesUpdated[x].getName() + "\t");
       }
     }
     System.out.println();
     for (int i = 0; i < length; i ++) {
       for (int j = 0; j < length + 1; j ++) {
-        System.out.print(graph[i][j] + "\t");
+        if (graph[i][j].length() > 6) {
+          System.out.print(graph[i][j].substring(0,6) + "\t");
+        } else {
+          System.out.print(graph[i][j] + "\t");
+        }
       }
       System.out.println();
     }

@@ -48,6 +48,9 @@ public class Runner {
     WeightedGraph wg = new WeightedGraph(list);
     //wg.printGraph();
 
+    wg.setCatNum(4);
+    wg.setItemNum(5);
+
     //#1 Pilot last name johnson lost file
     wg.addConnection(m, k, true, true);
     wg.addConnection(h, m, true, true);
@@ -89,11 +92,12 @@ public class Runner {
     //#9 jones not judge, doe not doc
     wg.addConnection(c, q, false, true); //judge  paula NOT
     wg.addConnection(s, e, false, true);
-
+    
     //#10 peggy and pat didn't lose lipstick
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
-
+    // wg.addConnection(c, g, true, true);
+    // wg.addConnection(c, o, true, true);
 
 
 
