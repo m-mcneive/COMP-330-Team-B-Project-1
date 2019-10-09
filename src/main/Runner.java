@@ -84,15 +84,15 @@ public class Runner {
     wg.addConnection(r, q, false, true); //judge  penny NOT
 
     //#8 peggy not teacher, jones, smith, or johnson
-    wg.addConnection(n, i, false, true);
-    wg.addConnection(n, d, false, true);
-    wg.addConnection(n, g, false, true);
-    wg.addConnection(n, k, false, true);
+  //  wg.addConnection(n, i, false, true);
+  //  wg.addConnection(n, d, false, true);
+    //wg.addConnection(n, g, false, true);
+    //wg.addConnection(n, k, false, true);
 
     //#9 jones not judge, doe not doc
-    wg.addConnection(c, q, false, true); //judge  paula NOT
+    //wg.addConnection(c, q, false, true); //judge  paula NOT
     wg.addConnection(s, e, false, true);
-    
+
     //#10 peggy and pat didn't lose lipstick
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
@@ -104,7 +104,7 @@ public class Runner {
     System.out.println(wg.checkForCompletion());
     wg.printGraph();
     System.out.println();
-    wg.printCompleteGraph();
+    wg.printIncompleteGraph();
 //test2
   }
 

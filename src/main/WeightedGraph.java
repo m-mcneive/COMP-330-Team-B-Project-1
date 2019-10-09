@@ -379,6 +379,29 @@ public void printCompleteGraph() {
 }
 
 
+public void printIncompleteGraph() {
+  for (int i = 0; i < itemNum; i++) {
+    System.out.print(nodesUpdated[i].getName() + " -> ");
+    String current = "";
+    for (int j = 0; j < length; j++) {
+      if (graph[i][j + 1].equals("2")) {
+        if (current.length() > 0) {
+          System.out.print(current.substring(0, current.length() - 3));
+        }
+        System.out.print(nodesUpdated[j].getName() + "   ");
+        current = "";
+      } else if (graph[i][j + 1].equals("1")) {
+        current += nodesUpdated[j].getName() + " or ";
+      }
+    }
+    if (current.length() > 0) {
+      System.out.print(current.substring(0, current.length() - 3));
+    }
+    System.out.println();
+  }
+}
+
+
 
 /*
 * prints the graph
