@@ -330,7 +330,7 @@ public void checkForConnections() {
 
 /*
 * Method to check if the graph is complete. Graph is complete when each row has
-* exactly 3 2 connections. Furthermore, there will be exactly 60 2 connections
+* exactly three 2 connections. Furthermore, there will be exactly 60 2 connections
 */
 
 public boolean checkForCompletion() {
@@ -383,19 +383,32 @@ public void printIncompleteGraph() {
   for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
     String current = "";
-    for (int j = 0; j < length; j++) {
-      if (graph[i][j + 1].equals("2")) {
-        if (current.length() > 0) {
-          System.out.print(current.substring(0, current.length() - 3));
+    boolean isValid = false;
+    boolean sameType = false;
+    for (int j = 0; j < length; j += itemNum) {
+      int num = 0;
+      for (int l = 0; l < itemNum; l++){
+        if (graph[i][j + l + 1].equals("2")) {
+          current = nodesUpdated[l + j].getName();
+          isValid = true;
+        } else if (graph[i][j + l + 1].equals("1")) {
+          current += nodesUpdated[j + l].getName() + " or ";
+          isValid = false;
+        } else {
+          num ++;
         }
-        System.out.print(nodesUpdated[j].getName() + "   ");
-        current = "";
-      } else if (graph[i][j + 1].equals("1")) {
-        current += nodesUpdated[j].getName() + " or ";
       }
-    }
-    if (current.length() > 0) {
-      System.out.print(current.substring(0, current.length() - 3));
+
+        if (isValid && num != 5) {
+          System.out.print(current + "  ");
+          current = "";
+          isValid = false;
+        } else if (num != 5) {
+          System.out.print(current.substring(0, current.length() - 3) + "  ");
+          current = "";
+        }
+
+
     }
     System.out.println();
   }
