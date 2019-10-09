@@ -5,7 +5,7 @@ public class WeightedGraph {
   //Number of unique nodes
   private int length;
   //This will be the final graph we use to solve the problem
-  private String[][] graph;
+  public String[][] graph;
   //This is the list of nodes as they are inputted, need to be sorted
   private Node[] nodesOriginal;
   //This is the list of nodes once seperated by type
