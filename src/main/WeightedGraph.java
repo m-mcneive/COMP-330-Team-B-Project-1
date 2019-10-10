@@ -126,14 +126,16 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   }
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
-  if (bool) {
+  if (!nodesUpdated[idx1].getType().equals(nodesUpdated[idx2].getType()) && canConnect(idx1, idx2)) {
+    if (bool) {
 
-    graph[idx1][idx2 + 1] = "2";
-    graph[idx2][idx1 + 1] = "2";
-  } else {
+      graph[idx1][idx2 + 1] = "2";
+      graph[idx2][idx1 + 1] = "2";
+    } else {
 
-    graph[idx1][idx2 + 1] = "0";
-    graph[idx2][idx1 + 1] = "0";
+      graph[idx1][idx2 + 1] = "0";
+      graph[idx2][idx1 + 1] = "0";
+    }
   }
 
   //This parameter is used so that the method connectRows() does not create an infinite loop
@@ -270,7 +272,13 @@ private void connectLikeOnes(int idx1, int idx2) {
 }
 
 
-
+public boolean canConnect(int idx1, int idx2) {
+  System.out.println(graph[idx1][idx2 + 1]);
+  if (graph[idx1][idx2 + 1].equals("1")) {
+    return true;
+  }
+  return false;
+}
 
 
 
@@ -325,6 +333,23 @@ public void checkForConnections() {
 
 
 
+public String currentValInGraph(Node a, Node b) {
+  //index of n1
+  int idx1 = -1;
+  //index of n2
+  int idx2 = -1;
+
+  //Looks through nodesUpdated to find the indecies of n1 and n2
+  for (int i = 0; i < length; i ++) {
+    if (nodesUpdated[i].getName().equals(a.getName())) {
+      idx1 = i;
+    } else if (nodesUpdated[i].getName().equals(b.getName())) {
+      idx2 = i;
+    }
+  }
+
+  return graph[idx1][idx2 + 1];
+}
 
 
 
@@ -364,7 +389,7 @@ public boolean checkForCompletion() {
 }
 
 
-//Test2
+
 
 public void printCompleteGraph() {
   for (int i = 0; i < itemNum; i++) {
@@ -384,7 +409,6 @@ public void printIncompleteGraph() {
     System.out.print(nodesUpdated[i].getName() + " -> ");
     String current = "";
     boolean isValid = false;
-    boolean sameType = false;
     for (int j = 0; j < length; j += itemNum) {
       int num = 0;
       for (int l = 0; l < itemNum; l++){
@@ -398,7 +422,6 @@ public void printIncompleteGraph() {
           num ++;
         }
       }
-
         if (isValid && num != 5) {
           System.out.print(current + "  ");
           current = "";
