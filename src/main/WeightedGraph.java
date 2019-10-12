@@ -404,7 +404,7 @@ public void printIncompleteGraph() {
           current = "";
           isValid = false;
         } else if (num != itemNum) {
-          System.out.print(current.substring(0, current.length() - 3) + "  ");
+          System.out.print(current.substring(0, current.length()) + "  ");
           current = "";
         }
 
