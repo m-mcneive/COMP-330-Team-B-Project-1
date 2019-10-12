@@ -138,5 +138,50 @@ public class WeightedGraphTest3 extends TestCase {
 	        assertTrue(test.checkForCompletion()); // graph is finished at this point
 	        
 		}
+	
+	public void testPrintIncompleteGraph() {
+			Node a = new Node("Bobby", "firstname");
+		    Node b = new Node("Charlotte", "firstname");
+		    Node c = new Node("Chocolate", "flavor");
+	        Node d = new Node("Candles","topping");
+		    Node e = new Node("Vanilla", "flavor");
+		    Node f = new Node("Sprinkles", "topping");
+		    Node g = new Node("Strawberry", "flavor");
+	        Node h = new Node("Frosting", "topping");
+	        Node i = new Node("Melonie", "firstname");
+	       
+	        Node[] simpleList = new Node[9];
+	        simpleList[0]= a;
+	        simpleList[1]= b;
+	        simpleList[2]= c;
+	        simpleList[3]= d;
+	        simpleList[4]= e;
+	        simpleList[5]= f;
+	        simpleList[6]= g;
+	        simpleList[7]= h;
+	        simpleList[8]= i;
+	        
+	        WeightedGraph test = new WeightedGraph(simpleList);
+	        test.setCatNum(3);
+	        test.setItemNum(3);
+	        
+	        test.addConnection(a,c,false,true);
+	        test.addConnection(c,h,true,true);
+	        test.printGraph();
+	        test.printIncompleteGraph();
+	        
+	        assertEquals(true,test.graph[0][4].equals("0"));
+	        assertEquals(true,test.graph[3][1].equals("0")); // Bobby hates chocolate indices
+	        assertEquals(true,test.graph[0][9].equals("2"));
+	        assertEquals(true,test.graph[8][1].equals("2")); //Chocolate and frosting tied
+	        assertEquals(true,test.graph[4][8].equals("1"));
+	        assertEquals(true,test.graph[7][5].equals("1")); //Sprinkles and Charlotte relationship
+	        assertEquals(true,test.graph[2][6].equals("1"));
+	        assertEquals(true,test.graph[5][3].equals("1")); //Melonie and Strawberries relationship should be neutral
+	        assertEquals(false,test.graph[2][6].equals("0"));
+	        assertEquals(false,test.graph[5][3].equals("0"));
+	        assertEquals(false,test.graph[2][6].equals("2"));
+	        assertEquals(false,test.graph[5][3].equals("2"));
+		}
 
 }
