@@ -126,15 +126,20 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   }
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
-  if (bool) {
+  if (graph[idx1][idx2 + 1].equals("1")) {
+    if (bool) {
 
-    graph[idx1][idx2 + 1] = "2";
-    graph[idx2][idx1 + 1] = "2";
+      graph[idx1][idx2 + 1] = "2";
+      graph[idx2][idx1 + 1] = "2";
+    } else {
+
+      graph[idx1][idx2 + 1] = "0";
+      graph[idx2][idx1 + 1] = "0";
+    }
   } else {
-
-    graph[idx1][idx2 + 1] = "0";
-    graph[idx2][idx1 + 1] = "0";
+    connect = false;
   }
+
 
   //This parameter is used so that the method connectRows() does not create an infinite loop
   //of calling this method

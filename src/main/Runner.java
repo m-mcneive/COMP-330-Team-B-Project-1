@@ -84,19 +84,20 @@ public class Runner {
     wg.addConnection(r, q, false, true); //judge  penny NOT
 
     //#8 peggy not teacher, jones, smith, or johnson
-  //  wg.addConnection(n, i, false, true);
-  //  wg.addConnection(n, d, false, true);
-    //wg.addConnection(n, g, false, true);
-    //wg.addConnection(n, k, false, true);
+    wg.addConnection(n, i, false, true);
+    wg.addConnection(n, d, false, true);
+    wg.addConnection(n, g, false, true);
+    wg.addConnection(n, k, false, true);
 
     //#9 jones not judge, doe not doc
-    //wg.addConnection(c, q, false, true); //judge  paula NOT
+    wg.addConnection(c, q, false, true); //judge  paula NOT
     wg.addConnection(s, e, false, true);
 
     //#10 peggy and pat didn't lose lipstick
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
-    // wg.addConnection(c, g, true, true);
+
+     wg.addConnection(c, g, true, true);
     // wg.addConnection(c, o, true, true);
 
 
