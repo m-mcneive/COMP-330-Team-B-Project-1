@@ -11,7 +11,9 @@ public class WeightedGraph {
   //This is the list of nodes once seperated by type
   private Node[] nodesUpdated;
 
+  //Number of categories
   private int catNum;
+  //Number of items in a given category
   private int itemNum;
 
   public WeightedGraph(Node[] nodesOriginal) {
@@ -21,7 +23,7 @@ public class WeightedGraph {
     buildGraph();
   }
 
-  // DG - added this for teh user to be able to enter any number of categories and items within them
+  // DG - added this for the user to be able to enter any number of categories and items within them
   public void setCatNum(int num){this.catNum = num;}
   public void setItemNum(int num){this.itemNum = num;}
   public int getItemNum(){return this.itemNum;}
@@ -167,8 +169,6 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
 */
 
 private void setNonDefaultZeros() {
-  //Number of elements per type
-  int numPerType = itemNum; // DG- edited this to reflect the number of items
 
   //Nested for loops iterate through the whole graph looking for any '2s'
   for (int i = 0; i < length; i++){
@@ -178,11 +178,11 @@ private void setNonDefaultZeros() {
         //finds which type group the 2 was found in (e.g. first names would be group 1,
         //items would be group 2, etc.)
         //Value for setting zeros in a row
-        int groupRow = (j-1) / numPerType + 1;
+        int groupRow = (j-1) / itemNum + 1;
 
         //Iterates through that group only, setting everything but the 2 to a zero
         //Sets the value in a row only
-        for (int x = (groupRow - 1) * numPerType + 1; x < (groupRow) * numPerType + 1; x++) {
+        for (int x = (groupRow - 1) * itemNum + 1; x < (groupRow) * itemNum + 1; x++) {
           if (!graph[i][x].equals("2"))
             graph[i][x] = "0";
           }
@@ -190,11 +190,11 @@ private void setNonDefaultZeros() {
         //finds which type group the 2 was found in (e.g. first names would be group 1,
         //items would be group 2, etc.)
         //Value for setting zeros in a column
-        int groupCol = i/numPerType + 1;
+        int groupCol = i/itemNum + 1;
 
         //Iterates through that group only, setting everything but the 2 to a zero
         //Sets the value in a column only
-        for (int y = (groupCol - 1) * numPerType; y < groupCol * numPerType; y++) {
+        for (int y = (groupCol - 1) * itemNum; y < groupCol * itemNum; y++) {
           if (!graph[y][j].equals("2"))
             graph[y][j] = "0";
           }
@@ -332,7 +332,6 @@ public void checkForConnections() {
 
 
 
-
 /*
 * Method to check if the graph is complete. Graph is complete when each row has
 * exactly three 2 connections. Furthermore, there will be exactly 60 2 connections
@@ -369,11 +368,15 @@ public boolean checkForCompletion() {
 }
 
 
-//Test2
+/*
+* Once the solution has been found, prints the final connections
+*/
 
 public void printCompleteGraph() {
+  //First 5 will act as "key" nodes
   for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
+    //In each row, any 2 connection will be printed
     for (int j = 0; j < length; j++) {
       if (graph[i][j + 1].equals("2")) {
         System.out.print(nodesUpdated[j].getName() + "   ");
@@ -384,36 +387,54 @@ public void printCompleteGraph() {
 }
 
 
+
+/*
+* If the user finishes inputting clues and no solution can be found, prints the
+* possible remaining connections
+*/
+
 public void printIncompleteGraph() {
+  //Selects the first group to act as the "key" nodes
   for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
-    String current = "";
-    boolean isValid = false;
-    boolean sameType = false;
+    String current = "";  //String that will be printed
+    boolean isValid = false;  //True if a 2 connection is found, false otherwise
+
+    //Loops through the rest of the row one group at a time
     for (int j = 0; j < length; j += itemNum) {
-      int num = 0;
+
+      int numZero = 0;  //Counts the number of zeros in each group
       for (int l = 0; l < itemNum; l++){
+
+        //If a 2 is found then this is an actual connection
         if (graph[i][j + l + 1].equals("2")) {
           current = nodesUpdated[l + j].getName();
           isValid = true;
+
+          //If a one is found then this connection is incomplete. Appends the name
+          // and " or "
         } else if (graph[i][j + l + 1].equals("1")) {
           current += nodesUpdated[j + l].getName() + " or ";
           isValid = false;
+
+          //Else increment numZero
         } else {
-          num ++;
+          numZero ++;
         }
       }
 
-        if (isValid && num != 5) {
+        //If numZero is 5 then the connection is of the same type and should
+        //not be printed
+        if (isValid && numZero != 5) {
           System.out.print(current + "  ");
           current = "";
           isValid = false;
-        } else if (num != 5) {
+
+          //If isValid is false, cuts off the last "or" before printing
+        } else if (numZero != 5) {
           System.out.print(current.substring(0, current.length() - 3) + "  ");
           current = "";
         }
-
-
     }
     System.out.println();
   }
@@ -427,6 +448,7 @@ public void printIncompleteGraph() {
 
   public void printGraph() {
     System.out.print("\t");
+    //Prints the column names
     for (int x = 0; x < length; x++) {
       if (nodesUpdated[x].getName().length() > 6) {
         System.out.print(nodesUpdated[x].getName().substring(0,6) + "\t");

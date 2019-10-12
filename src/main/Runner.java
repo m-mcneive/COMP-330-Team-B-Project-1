@@ -97,8 +97,7 @@ public class Runner {
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
 
-     wg.addConnection(c, g, true, true);
-    // wg.addConnection(c, o, true, true);
+
 
 
 
