@@ -5,7 +5,7 @@ public class WeightedGraph {
   //Number of unique nodes
   private int length;
   //This will be the final graph we use to solve the problem
-  private String[][] graph;
+  public String[][] graph;
   //This is the list of nodes as they are inputted, need to be sorted
   private Node[] nodesOriginal;
   //This is the list of nodes once seperated by type
@@ -423,6 +423,7 @@ public void printIncompleteGraph() {
         }
       }
 
+<<<<<<< HEAD
         //If numZero is 5 then the connection is of the same type and should
         //not be printed
         if (isValid && numZero != 5) {
@@ -433,6 +434,14 @@ public void printIncompleteGraph() {
           //If isValid is false, cuts off the last "or" before printing
         } else if (numZero != 5) {
           System.out.print(current.substring(0, current.length() - 3) + "  ");
+=======
+        if (isValid && num != itemNum) {
+          System.out.print(current + "  ");
+          current = "";
+          isValid = false;
+        } else if (num != itemNum) {
+          System.out.print(current.substring(0, current.length()) + "  ");
+>>>>>>> f9b91ac3c0e37868cfdcfd431bf5a7e885ed0172
           current = "";
         }
     }
