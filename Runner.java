@@ -1,3 +1,9 @@
+//this class is purely for testing purposes without having to individually type in all of the user 
+//input. We've added onto this class to prove that our program works with a graph larger than 20 nodes. 
+
+
+
+
 public class Runner {
   public static void main(String[] args) {
     Node a = new Node("pat", "firstname");
@@ -23,8 +29,21 @@ public class Runner {
     Node r = new Node("penny", "firstname");
     Node s = new Node("doe", "lastname");
     Node t = new Node("keyring", "item");
+    
+    Node u= new Node("red","hair");
+    Node v= new Node("brown","hair");
+    Node w= new Node("blonde", "hair");
+    Node x= new Node("black","hair");
+    Node y= new Node("strawberry","hair");
+    Node z= new Node("sandy","hair");
+    
+    Node aa= new Node("patrice","firstname");
+    Node bb= new Node("nurse","job");
+    Node cc= new Node("miller","lastname");
+    Node ab= new Node("wallet","item");
+    
 
-    Node[] list = new Node[20];
+    Node[] list = new Node[30];
     list[0] = a;
     list[1] = b;
     list[2] = c;
@@ -45,8 +64,22 @@ public class Runner {
     list[17] = r;
     list[18] = s;
     list[19] = t;
+    list[20]=u;
+    list[21]=v;
+    list[22]=w;
+    list[23]=x;
+    list[24]=y;
+    list[25]=z;
+    list[26]=aa;
+    list[27]=bb;
+    list[28]=cc;
+    list[29]=ab;
+    
     WeightedGraph wg = new WeightedGraph(list);
     //wg.printGraph();
+    
+    wg.setCatNum(5);;
+    wg.setItemNum(6);
 
     //#1 Pilot last name johnson lost file
     wg.addConnection(m, k, true, true);
@@ -93,7 +126,22 @@ public class Runner {
     //#10 peggy and pat didn't lose lipstick
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
+    
+    //#11 patrice does not have red hair, and lost her wallet and is a nurse
+    wg.addConnection(aa, u, false, true);
+    wg.addConnection(aa,  ab,  true, true);
+    wg.addConnection(aa, bb, true, true);
+    
+    //#12 miller has brown hair, jones has red hair, dixon has black hair
+    wg.addConnection(cc,  v, true, true);
+    wg.addConnection(c, u, true, true);
+    wg.addConnection(o, x, true, true);
 
+    //#13 smith has blonde hair, Johnson has strawberry hair, doe has sandy hair
+    wg.addConnection(aa, cc, true, true);
+    wg.addConnection(g, w, true, true);
+    wg.addConnection(k, y, true, true);
+    wg.addConnection(s, z, true, true);
 
 
 
