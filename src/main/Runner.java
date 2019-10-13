@@ -1,6 +1,6 @@
 public class Runner {
   public static void main(String[] args) {
-  /*  Node a = new Node("pat", "firstname");
+    Node a = new Node("pat", "firstname");
     Node b = new Node("lip", "item");
     Node c = new Node("paula", "firstname");
     Node d = new Node("jones", "lastname");
@@ -104,8 +104,8 @@ public class Runner {
     System.out.println(wg.checkForCompletion());
     wg.printGraph();
     System.out.println();
-    wg.printIncompleteGraph();*/
-
+    wg.printIncompleteGraph();
+/*
       Node a = new Node("Bobby", "firstname");
       Node b = new Node("Charlotte", "firstname");
       Node c = new Node("Chocolate", "flavor");
@@ -134,7 +134,7 @@ public class Runner {
         test.addConnection(a,c,false,true);
         test.addConnection(c,h,true,true);
         test.printGraph();
-        test.printIncompleteGraph();
+        test.printIncompleteGraph();*/
 //test2
   }
 
