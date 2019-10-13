@@ -95,11 +95,6 @@ public class Runner {
     //#10 peggy and pat didn't lose lipstick
     wg.addConnection(n, b, false, true);
     wg.addConnection(a, b, false, true);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> mattBranch
 
 
 
@@ -109,7 +104,7 @@ public class Runner {
     wg.printGraph();
     System.out.println();
     wg.printCompleteGraph();
-    wg.printIncompleteGraph();
+    //wg.printIncompleteGraph();
 /*
       Node a = new Node("Bobby", "firstname");
       Node b = new Node("Charlotte", "firstname");

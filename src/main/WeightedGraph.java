@@ -128,11 +128,7 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
   }
   //A true value for bool means that there is a positive connection between n1 and n2
   //a false bool means a negative one
-<<<<<<< HEAD
   if (!nodesUpdated[idx1].getType().equals(nodesUpdated[idx2].getType()) && canConnect(idx1, idx2)) {
-=======
-  if (graph[idx1][idx2 + 1].equals("1")) {
->>>>>>> mattBranch
     if (bool) {
 
       graph[idx1][idx2 + 1] = "2";
@@ -142,11 +138,8 @@ public void addConnection(Node n1, Node n2, boolean bool, boolean connect) {
       graph[idx1][idx2 + 1] = "0";
       graph[idx2][idx1 + 1] = "0";
     }
-<<<<<<< HEAD
-=======
   } else {
     connect = false;
->>>>>>> mattBranch
   }
 
 
@@ -398,13 +391,9 @@ public boolean checkForCompletion() {
 }
 
 
-<<<<<<< HEAD
-
-=======
 /*
 * Once the solution has been found, prints the final connections
 */
->>>>>>> mattBranch
 
 public void printCompleteGraph() {
   //First 5 will act as "key" nodes
@@ -431,15 +420,10 @@ public void printIncompleteGraph() {
   //Selects the first group to act as the "key" nodes
   for (int i = 0; i < itemNum; i++) {
     System.out.print(nodesUpdated[i].getName() + " -> ");
-<<<<<<< HEAD
-    String current = "";
-    boolean isValid = false;
-=======
     String current = "";  //String that will be printed
     boolean isValid = false;  //True if a 2 connection is found, false otherwise
 
     //Loops through the rest of the row one group at a time
->>>>>>> mattBranch
     for (int j = 0; j < length; j += itemNum) {
 
       int numZero = 0;  //Counts the number of zeros in each group
@@ -461,13 +445,9 @@ public void printIncompleteGraph() {
           numZero ++;
         }
       }
-<<<<<<< HEAD
-        if (isValid && num != 5) {
-=======
 
         //If there is a valid connection, print it
         if (isValid && numZero != itemNum) {
->>>>>>> mattBranch
           System.out.print(current + "  ");
           current = "";
           isValid = false;
