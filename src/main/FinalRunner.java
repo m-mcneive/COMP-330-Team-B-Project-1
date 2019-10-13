@@ -143,6 +143,7 @@ public class FinalRunner {
             do {// types check
                 do {//asked option check
                 	do {//correct input check
+                		placeInProgram = 1;
                 		askedOption = false;
                         firstInput = false;
                         correctInput = false;
@@ -255,7 +256,6 @@ public class FinalRunner {
             wg.addConnection(placeholderA, placeholderB, relationship, true);
             System.out.println("Connection has been made. Please view the changes below");
             wg.printGraph();
-            System.out.println(wg.checkForCompletion());
             if(!wg.checkForCompletion()) {
                 System.out.println("Time to add the next connection.");
                 placeholderA = null;
