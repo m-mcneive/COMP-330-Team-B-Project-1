@@ -423,25 +423,18 @@ public void printIncompleteGraph() {
         }
       }
 
-<<<<<<< HEAD
-        //If numZero is 5 then the connection is of the same type and should
-        //not be printed
-        if (isValid && numZero != 5) {
+        //If there is a valid connection, print it
+        if (isValid && numZero != itemNum) {
           System.out.print(current + "  ");
           current = "";
           isValid = false;
-
-          //If isValid is false, cuts off the last "or" before printing
-        } else if (numZero != 5) {
-          System.out.print(current.substring(0, current.length() - 3) + "  ");
-=======
-        if (isValid && num != itemNum) {
-          System.out.print(current + "  ");
-          current = "";
-          isValid = false;
-        } else if (num != itemNum) {
-          System.out.print(current.substring(0, current.length()) + "  ");
->>>>>>> f9b91ac3c0e37868cfdcfd431bf5a7e885ed0172
+        //Else cut off the final "or" then print
+        } else if (numZero != itemNum) {
+          if (current.length() > 3) {
+            System.out.print(current.substring(0, current.length() - 3) + "  ");
+          } else {
+            System.out.print(current + "  ");
+          }
           current = "";
         }
     }

@@ -1,6 +1,6 @@
 public class Runner {
   public static void main(String[] args) {
-    Node a = new Node("pat", "firstname");
+  /*  Node a = new Node("pat", "firstname");
     Node b = new Node("lip", "item");
     Node c = new Node("paula", "firstname");
     Node d = new Node("jones", "lastname");
@@ -104,7 +104,37 @@ public class Runner {
     System.out.println(wg.checkForCompletion());
     wg.printGraph();
     System.out.println();
-    wg.printIncompleteGraph();
+    wg.printIncompleteGraph();*/
+
+      Node a = new Node("Bobby", "firstname");
+      Node b = new Node("Charlotte", "firstname");
+      Node c = new Node("Chocolate", "flavor");
+      Node d = new Node("Candles","topping");
+      Node e = new Node("Vanilla", "flavor");
+      Node f = new Node("Sprinkles", "topping");
+      Node g = new Node("Strawberry", "flavor");
+      Node h = new Node("Frosting", "topping");
+      Node i = new Node("Melonie", "firstname");
+
+        Node[] simpleList = new Node[9];
+        simpleList[0]= a;
+        simpleList[1]= b;
+        simpleList[2]= c;
+        simpleList[3]= d;
+        simpleList[4]= e;
+        simpleList[5]= f;
+        simpleList[6]= g;
+        simpleList[7]= h;
+        simpleList[8]= i;
+
+        WeightedGraph test = new WeightedGraph(simpleList);
+        test.setCatNum(3);
+        test.setItemNum(3);
+
+        test.addConnection(a,c,false,true);
+        test.addConnection(c,h,true,true);
+        test.printGraph();
+        test.printIncompleteGraph();
 //test2
   }
 
