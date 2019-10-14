@@ -1,4 +1,8 @@
 public class Runner {
+  /*
+  * This class is used for testing. Nodes and connections are set manually and the entire program 
+  * can be run at once. Saves tim by not requiring everything to be input manually through a Scanner
+  */
   public static void main(String[] args) {
     Node a = new Node("pat", "firstname");
     Node b = new Node("lip", "item");
